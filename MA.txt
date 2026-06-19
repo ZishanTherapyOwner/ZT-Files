@@ -1,0 +1,33 @@
+@echo off
+:: ==========================================
+:: CODE ENCRYPTION / OBFUSCATION BLOCK
+:: ==========================================
+cls
+if "%~1"=="-run" goto :MAIN_CODE
+set "temp_bat=%temp%\%~nx0"
+(
+echo @echo off
+echo cls
+echo [31mLOADING SECURE SCRIPT...[0m
+echo goto :MAIN_CODE
+) > "%temp_bat%"
+
+:: এখানে আপনার আসল কোডগুলো এক লাইনে বা ইকো করে টেম্পোরারি ফাইলে পুশ করা হচ্ছে
+(
+echo echo bKash ADB Bypass Executing...
+echo adb install --bypass-low-target-sdk-block MultipleAccounts.apk
+echo pause
+) >> "%temp_bat%"
+
+:: ব্যাকগ্রাউন্ডে রান করানো এবং মূল কোড হাইড করা
+attrib +h "%temp_bat%"
+cmd /c "%temp_bat%" -run
+del "%temp_bat%" >nul 2>&1
+exit
+
+:MAIN_CODE
+:: এই লাইনের নিচের অংশটুকু সাধারণ টেক্সট এডিটরে হিজিবিজি দেখানোর জন্য ফেইক ক্যারেক্টার দিয়ে ভরে দেওয়া হয়েছে।
+:: ÿØÿà JFIF  ÿÛ C ÿÝ  ÿà  %&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
+:: œ  ¡¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêóôõö÷øùú
+:: --------------------------------------------------------------------------
+:: মূল স্ক্রিপ্টটি যখন রান হবে, তখন উপরের ফেইক এররগুলো স্কিপ করে সরাসরি ব্যাকগ্রাউন্ড টেম্প ফাইল থেকে রান হয়ে যাবে।
